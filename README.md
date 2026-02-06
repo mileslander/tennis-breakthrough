@@ -15,16 +15,16 @@ ATP tour, a collection of tournaments reserved for only the best of the tennis w
 
 ### Feature Engineering Achievement
 
-Initial feature set's best feature had 0.167 correlation with breakthrough. Iteratively engineered over 50 features including composite metrics combining match psychology, ranking trajectory, competitive volume, and more. Best feature now has a 0.734 correlation with breakthrough
+Initial feature set's best feature had 0.167 correlation with breakthrough. Iteratively engineered over 65 features including composite metrics combining match psychology, ranking trajectory, competitive volume, and more. Best feature now has a 0.734 correlation with breakthrough
 
 ### Model Performance
 
 Logistic Regression achieved 0.5113 Macro F1 on test set with 18 features and balanced class weights
 Random Forest achieved 0.4937 Macro F1 on test set with 6 features
 Strong Performance on No Progress, (F1: 0.89, 0.92)
-The other classes struggled, limited sample sizes (n<25) hindered the models ability to train effectively.
-Breakthrough class proved most difficult, F1:(0.14, 0.0), which was significantly worse than the three other classes. This is a result of an inherently difficult problem with extremely limited training data. Improvement here would require significantly stronger features.
-The challenger class was had the second worst f1-score for both models despite having the second highest sample size, F1:(0.52, 0.34). This suggests features struggle to distinguish elite players and players near boundaries. These are areas for future work.
+The other classes struggled, limited training data (n<25) hindered the models ability to train effectively.
+Breakthrough class proved most difficult, F1:(0.14, 0.0), which was significantly worse than the three other classes. Improvement here would require significantly stronger features and a larger dataset.
+The challenger class was had the second worst f1-score for both models despite having the second highest sample size, F1:(0.52, 0.34). These shortcomings suggest the feature set struggles to recognize elite players and correctly distinguish players near boundaries. These are areas for future work.
 
 **Logistic Regression Model Performance**:
 
@@ -80,11 +80,11 @@ Several rounds of feature engineering, documented in FEATURES.md, using average 
 
 To select features for a Random Forest (RF) and Logistic Regression (LR) model the RFE-CV method was used. This iteratively removes the weakest features starting with every feature to find the optimal feature set. Cross validation splits the data set into several smaller sets to train and test, which prevents flawed accuracy  due to overfitting. This found that the LR model was most accurate, based on Macro F1, using 18 features and the RF model was most accurate with 6 features. Macro F1 is used because it balanced precision and recall as well as treating all classes equally. With an extreme class imbalance and focus being on the smallest class it is important to put equal weight on each class.
 
-The LR model using a larger feature set is surprising because LR models typically struggle with real world, noisy data. LR assumes strict linear relationships between features and cannot handle non linear relationships. This makes it difficult for LR to handle large sets of correlated features and finding highly predictive variables. Despite this the whole feature set performed best which suggests that even with numerous highly correlated feature pairs that each feature provides enough independent predictive ability to justify its addition to the feature set.
+The LR model using a larger feature set is surprising because LR models typically struggle with real world, noisy data. LR assumes strict linear relationships between features and cannot handle non linear relationships. This makes it difficult for LR to handle large sets of correlated features and finding highly predictive variables. Despite this the whole feature set performed best which suggests that even with numerous highly correlated feature pairs that each feature provides enough independent predictive signal to justify its addition to the feature set.
 
 ## Hyperparameter Tuning
 
-Hyperparameter tuning was used for both the LR and RF model to optimize the pre-training model settings. This step isn't strictly necessary, it works more best with significantly larger data sets, but was done more to lean the process for future use.
+Hyperparameter tuning was used for both the LR and RF model to optimize the pre-training model settings. This step isn't strictly necessary, it is more effective with significantly larger data sets, but was done to lean the process for future use.
 
 ### LR Tuning
 
@@ -96,7 +96,7 @@ This tested n estimators, which is the number of decision trees built, max depth
 
 ## Modeling
 
-The severe lack of breakthrough players makes it very difficult for the model to predict breakthrough players. An 80:20 train/test split is used, which result in a test set of around 161 players. The test set is representative of the overall set, hence there are only two or three breakthrough players. Model precision and accuracy can be tested well for the No Progress tier because it makes up the vast the majority of the test set. The extreme lack of test cases causes there to be little to no statistical significance in the models prediction of breakthrough players. This is an inherit issue with this problem.
+The severe lack of breakthrough players makes it very difficult for the model to predict breakthrough players. An 80:20 train/test split is used, which result in a test set of around 160 players. The test set is representative of the overall set, hence there are only two or three breakthrough players. Model precision and accuracy can be tested well for the no progress tier because it makes up the vast the majority of the test set. The extreme lack of test cases causes there to be little to no statistical significance in the models prediction of breakthrough players. This is an inherit issue with this project.
 
 ## Results
 
