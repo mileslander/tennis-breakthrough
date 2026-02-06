@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyc
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Virtual Environments  
+venv/
+env/
+
+# Large Data Files
+data/
+*.csv
+*.db
+*.sqlite
+
+# Model Files
+models/
+*.pkl
+*.joblib
+
+# Keep small examples
+!output/examples/*.csv
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
