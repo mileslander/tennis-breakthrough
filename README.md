@@ -20,7 +20,7 @@ This section outlines achievement in feature engineering and model performance.
 
 ### Feature Engineering Achievement
 
-Initial feature set's best feature had 0.167 correlation with breakthrough. Iteratively engineered over 65 features including composite metrics combining match psychology, ranking trajectory, competitive volume, and more. Best feature now has a 0.734 correlation with breakthrough
+The initial feature set's best feature had 0.167 correlation with breakthrough. After iteratively engineering over 50 features including composite metrics combining match psychology, ranking trajectory, and competitive volume, the resulting best feature has a 0.734 correlation with breakthrough.
 
 ### Model Performance
 
@@ -85,7 +85,7 @@ Several rounds of feature engineering were performed using average match lengths
 
 To select features for a Random Forest (RF) and Logistic Regression (LR) model the recursive feature elimination method was used with cross validation testing. This iteratively removes the weakest features starting with every feature to find the optimal feature set. Cross validation splits the data set into several smaller sets to train and test, which prevents flawed accuracy due to overfitting. Recursive feature elimination found that the LR model was most accurate, based on Macro F1, using 18 features and the RF model was most accurate with 6 features. Macro F1 is used because it balances precision and recall as well as treats all classes equally. With an extreme class imbalance and focus being on the smallest class it is important to put equal weight on each class.
 
-The LR model using a larger feature set is surprising because LR models typically struggle with real world, noisy data. LR assumes strict linear relationships between features and cannot handle non linear relationships. This makes it difficult for LR to handle large sets of correlated features and finding highly predictive variables. Despite this the whole feature set performed best which suggests that even with numerous highly correlated feature pairs that each feature provides enough independent predictive signal to justify its addition to the feature set.
+The LR model using a larger feature set is surprising because LR models typically struggle with real world, noisy data. LR assumes strict linear relationships between features and cannot handle non linear relationships. This makes it difficult for LR to handle large sets of correlated features and finding highly predictive variables. Despite this the a large feature set performed best which suggests that even with numerous highly correlated feature pairs that each feature provides enough independent predictive signal to justify its addition to the feature set.
 
 ## Hyperparameter Tuning
 
