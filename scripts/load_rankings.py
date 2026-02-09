@@ -40,4 +40,4 @@ def load_rankings(filename, db_path):
 
 
 if __name__ == '__main__':
-	load_rankings('tennis_atp/atp_rankings_20s.csv', 'tennis_breakthrough.db')
+	load_rankings('tennis_atp/atp_rankings_10s.csv', 'tennis_breakthrough.db')

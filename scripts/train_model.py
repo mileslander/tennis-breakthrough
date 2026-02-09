@@ -104,7 +104,7 @@ SELECT
     MIN(rank) as baseline_rank,
     ranking_date as baseline_date
 FROM rankings
-WHERE ranking_date BETWEEN 20210901 AND 20210930
+WHERE ranking_date BETWEEN 20110101 AND 20160101
   AND player_id IN ({player_ids_str})
 GROUP BY player_id
 """
@@ -121,7 +121,7 @@ SELECT
     MIN(rank) as best_rank,
     ranking_date as best_rank_date
 FROM rankings
-WHERE ranking_date BETWEEN 20220101 AND 20230131
+WHERE ranking_date BETWEEN 20160101 AND 20170101
   AND player_id IN ({player_ids_str})
 GROUP BY player_id
 """
@@ -240,7 +240,7 @@ SELECT
     Won as result,
     duration as minutes
 FROM Matches
-WHERE Date BETWEEN 20210901 AND 20211231
+WHERE Date BETWEEN 20110101 AND 20160101
   AND pid IN ({player_ids_str})
   AND Duration IS NOT NULL
   AND Duration > 0
@@ -419,7 +419,7 @@ SELECT
     player_id,
     MAX(rank) as final_window_rank
 FROM rankings
-WHERE ranking_date BETWEEN 20211201 AND 20211231
+WHERE ranking_date BETWEEN 20151201 AND 20151231
   AND player_id IN ({player_ids_str})
 GROUP BY player_id
 """

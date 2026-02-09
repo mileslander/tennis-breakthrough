@@ -6,7 +6,7 @@
 WITH target_players AS (
     SELECT DISTINCT m.pid as player_id
     FROM Matches m
-    WHERE m.Date BETWEEN 20210901 AND 20211231
+    WHERE m.Date BETWEEN 20110101 AND 20160101
       AND m.Score NOT LIKE '%RET%'
       AND m.Score NOT LIKE '%W/O%'
       AND m.Score IS NOT NULL
@@ -14,14 +14,14 @@ WITH target_players AS (
       AND m.pid NOT IN (
           SELECT DISTINCT player_id
           FROM rankings
-          WHERE ranking_date BETWEEN 20210901 AND 20211231
+          WHERE ranking_date BETWEEN 20110101 AND 20160101
             AND rank <= 150
       )
       -- Require minimum activity
       AND m.pid IN (
           SELECT pid
           FROM Matches
-          WHERE Date BETWEEN 20210901 AND 20211231
+          WHERE Date BETWEEN 20110101 AND 20160101
           GROUP BY pid
           HAVING COUNT(*) >= 5
       )
@@ -50,7 +50,7 @@ opponent_features AS (
                   SUM(CASE WHEN prank - orank > 99 THEN 1 ELSE 0 END)
              ELSE 0 END as win100_rate
     FROM Matches
-    WHERE Date BETWEEN 20210901 AND 20211231
+    WHERE Date BETWEEN 20110101 AND 20160101
       AND pid IN (SELECT player_id FROM target_players)
     GROUP BY pid
 ),
@@ -65,7 +65,7 @@ rolling_features AS (
              THEN CAST(SUM(CASE WHEN Won = 1 THEN 1 ELSE 0 END) AS REAL) / COUNT(*)
              ELSE 0 END as win_rate_4month
     FROM matches
-    WHERE Date BETWEEN 20210901 AND 20211231
+    WHERE Date BETWEEN 20110101 AND 20160101
       AND Score NOT LIKE '%RET%' 
       AND Score NOT LIKE '%W/O%' 
       AND Score IS NOT NULL
@@ -76,7 +76,7 @@ rolling_features AS (
 breakthrough_players AS (
     SELECT DISTINCT pid as player_id
     FROM Matches
-    WHERE Date BETWEEN 20220101 AND 20221231 AND prank <= 100
+    WHERE Date BETWEEN 20160101 AND 20170101 AND prank <= 100
 ),
 
 -- Step 4: Label each target player as a breakthrough or not
